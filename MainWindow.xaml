@@ -1,0 +1,23 @@
+﻿<Window x:Class="ICT.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Image Comparison Tool" Width="1280" Height="720" 
+        AllowDrop="True" DragEnter="Window_DragEnter" Drop="Window_Drop">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <WrapPanel x:Name="ButtonPanel" Orientation="Horizontal" HorizontalAlignment="Center"  Margin="10"/>
+
+        <Grid Grid.Row="1">
+            <TextBlock x:Name="PlaceholderText" Text="Drop Images Here"
+                       FontSize="32" FontWeight="Bold" Foreground="Gray"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <Image x:Name="MainImage" Stretch="Uniform" Visibility="Collapsed" Margin="10, 0, 10, 10"/>
+        </Grid>
+    </Grid>
+</Window>
