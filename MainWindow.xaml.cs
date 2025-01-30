@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
-namespace ICT;
+namespace ImageComparisonTool;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
@@ -48,12 +48,22 @@ public partial class MainWindow : Window
         };
 
         fileButton.MouseEnter += FileButton_Hover;
+        fileButton.Click += FileButton_Click;
+
         ButtonPanel.Children.Add(fileButton);
 
         if (ButtonPanel.Children.Count == 1)
             ShowImage(filePath);
 
         UpdateUI();
+    }
+
+    private void FileButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is Button button && button.Tag is string filePath)
+        {
+            RemoveImageButton(filePath);
+        }
     }
 
     private void FileButton_Hover(object sender, RoutedEventArgs e)
@@ -75,6 +85,20 @@ public partial class MainWindow : Window
         catch
         {
             MessageBox.Show("Unable to load image", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    private void RemoveImageButton(string filePath)
+    {
+        var button = ButtonPanel
+            .Children
+            .OfType<Button>()
+            .FirstOrDefault(x => x.Tag is string tagStr && tagStr == filePath);
+
+        if (button != null)
+        {
+            ButtonPanel.Children.Remove(button);
+            UpdateUI();
         }
     }
 
